@@ -27,6 +27,7 @@ task appVersion {
 
 android {
     compileSdkVersion 29
+    ndkVersion "20.0.5594570"
     defaultConfig {
         applicationId "cc.echonet.coolmicapp"
         versionCode versionCodeTmp
