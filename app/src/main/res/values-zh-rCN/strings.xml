@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="timer">時間:</string>
+    <string name="start_broadcast">開始 Live</string>
+    <string name="menu_action_settings">設定</string>
+    <string name="pref_title_connection_reconnect">通信異常時自動再試行</string>
+    <string name="pref_option_connection_reconnect_off">無效</string>
+    <string name="pref_option_connection_reconnect_on">有效</string>
+    <string name="broadcasting">Live 中 - 押此処停止</string>
+    <string name="settingsactivity_permission_not_granted">未許可權限：%1$s</string>
+    <string name="pref_title_connection_username">User 名</string>
+    <string name="popup_first_time_title">Cool Mic：歡迎</string>
+    <string name="popup_new_version_title">変更履歷</string>
+    <string name="popup_permissions_title">Cool Mic: 權限</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="mainactivity_native_components_init_error">Native 側初期化失敗 :( 拒否操作</string>
+    <string name="mainactivity_toast_check_connection">確認 Internet</string>
+    <string name="reconnect_in">%d 秒後再試行</string>
+    <string name="lblState">狀態:</string>
+    <string name="lblListeners">視聽者:</string>
+    <string name="broadcast_stop_message">Live 停止</string>
+    <string name="mainactivity_callback_error">發生 Error！詳細：%1$s</string>
+    <string name="formatListeners">%1$d ( 最大: %2$d )</string>
+    <string name="coolmic_error_n1">不明問題</string>
+    <string name="coolmic_error_n13">検証失敗</string>
+    <string name="coolmic_error_n14">通信拒絕</string>
+    <string name="pref_header_connection">通信設定</string>
+    <string name="coolmic_cs_p1">Connect 中</string>
+    <string name="coolmic_cs_p2">已 Connect</string>
+    <string name="coolmic_cs_p3">切斷中</string>
+    <string name="coolmic_cs_p4">切斷</string>
+    <string name="cmdStartInitializing">Connect 中</string>
+    <string name="pref_header_audio">音声設定</string>
+    <string name="pref_title_audio_channels">Channel 配置</string>
+    <string name="pref_title_audio_quality">質量 Level</string>
+    <string-array name="pref_titles_audio_channels">
+        <item>Mono (1 個 Channel)</item>
+        <item>Stereo (2 個 Channel)</item>
+    </string-array>
+    <string name="menu_action_quit">終了</string>
+</resources>

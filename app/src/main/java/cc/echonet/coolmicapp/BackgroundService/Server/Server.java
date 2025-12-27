@@ -320,8 +320,8 @@ public class Server extends Service implements CallbackHandler {
 
     private void postNotification() {
         boolean flashLed = (state.uiState == Constants.CONTROL_UI.CONTROL_UI_CONNECTED);
-        String title = String.format(Locale.ENGLISH, "State: %s", state.txtState);
-        String message = String.format(Locale.ENGLISH, "Listeners: %s", state.getListenersString(getApplicationContext()));
+        String title = String.format(Locale.ENGLISH, "%s %s", getString(R.string.lblState), state.getTextState(this));
+        String message = String.format(Locale.ENGLISH, "%s %s", getString(R.string.lblListeners), state.getListenersString(getApplicationContext()));
 
         if (message.equals(oldNotificationMessage) && title.equals(oldNotificationTitle) && flashLed == oldNotificationFlashLed) {
             return;
@@ -516,7 +516,7 @@ public class Server extends Service implements CallbackHandler {
 
         state.initialConnectPerformed = false;
 
-        state.txtState = "Disconnected";
+        state.txtState = getString(R.string.coolmic_cs_p4);
 
         for (Messenger client : clients) {
             Message msgReply = createMessage(Constants.S2C_MSG_STREAM_STOP_REPLY);

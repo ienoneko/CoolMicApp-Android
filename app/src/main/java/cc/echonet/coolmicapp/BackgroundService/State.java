@@ -37,7 +37,7 @@ import cc.echonet.coolmicapp.R;
 
 public class State implements Serializable {
     public Constants.CONTROL_UI uiState = Constants.CONTROL_UI.CONTROL_UI_DISCONNECTED;
-    public String txtState = "Disconnected";
+    public String txtState;
 
     public int bindCounts = 0;
     public int clientCount = 0;
@@ -67,6 +67,10 @@ public class State implements Serializable {
     }
 
     public @NotNull String getTextState(@NotNull Context context) {
+        if (txtState == null) {
+            return context.getString(R.string.coolmic_cs_p4);
+        }
+
         return txtState;
     }
 
