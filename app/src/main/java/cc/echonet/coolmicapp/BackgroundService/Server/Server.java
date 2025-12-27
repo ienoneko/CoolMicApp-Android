@@ -22,11 +22,15 @@
 
 package cc.echonet.coolmicapp.BackgroundService.Server;
 
+import android.annotation.SuppressLint;
 import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.WifiLock;
 import android.os.*;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.widget.Toast;
 import cc.echonet.coolmicapp.BackgroundService.Constants;
@@ -58,6 +62,9 @@ public class Server extends Service implements CallbackHandler {
     @SuppressWarnings("HardcodedFileSeparator")
     private static final String TAG = "BGS/Server";
 
+    private static final String WAKE_LOCK_TAG = "coolmic:wakelock";
+    private static final String WIFI_LOCK_TAG = "coolmic";
+
     private final List<Messenger> clients = new ArrayList<>();
     /**
      * Target we publish for clients to send messages to IncomingHandler.
@@ -66,6 +73,8 @@ public class Server extends Service implements CallbackHandler {
     private final Messenger mMessenger;
     private final IncomingHandler mIncomingHandler;
     private Notification notification = null;
+    private WakeLock mWakeLock;
+    private WifiLock mWifiLock;
     private Manager manager;
     private Profile profile;
 
@@ -253,10 +262,19 @@ public class Server extends Service implements CallbackHandler {
         startForeground(Constants.NOTIFICATION_ID_LED, notification);
     }
 
+    @SuppressLint("WakelockTimeout")
     @Override
     public void onCreate() {
         super.onCreate();
         setupForegroundService();
+
+        PowerManager pwrMgr = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        mWakeLock = pwrMgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, WAKE_LOCK_TAG);
+        mWakeLock.acquire();
+
+        WifiManager wifiMgr = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        mWifiLock = wifiMgr.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, WIFI_LOCK_TAG);
+        mWifiLock.acquire();
     }
 
     @Override
@@ -647,6 +665,9 @@ public class Server extends Service implements CallbackHandler {
         nm.cancel(Constants.NOTIFICATION_ID_LED);
 
         stopForeground(true);
+
+        mWakeLock.release();
+        mWifiLock.release();
 
         if (icecast != null) {
             icecast.close();
