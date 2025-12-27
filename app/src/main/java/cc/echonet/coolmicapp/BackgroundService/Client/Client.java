@@ -192,6 +192,10 @@ public class Client implements Closeable {
                     client.eventListener.onBackgroundServicePermissionsMissing();
                     break;
 
+                case Constants.S2C_MSG_BATTERY_OPTIMIZATIONS_DETECTED:
+                    client.eventListener.onBackgroundServiceBatteryOptimizationsIsOn();
+                    break;
+
                 case Constants.S2C_MSG_CONNECTION_UNSET:
                     client.eventListener.onBackgroundServiceConnectionUnset();
                     break;

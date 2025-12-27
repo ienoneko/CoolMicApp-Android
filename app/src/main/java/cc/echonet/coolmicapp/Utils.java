@@ -23,12 +23,17 @@
 package cc.echonet.coolmicapp;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -159,6 +164,30 @@ public final class Utils {
         } else {
             return false;
         }
+    }
+
+    public static boolean checkBatteryOptimizationsEnabled(@NotNull Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PowerManager pwrMgr = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+
+            return !pwrMgr.isIgnoringBatteryOptimizations(context.getPackageName());
+        }
+
+        return false;
+    }
+
+    @SuppressLint("BatteryLife")
+    public static void openBatteryOptimizationSettings(@NotNull Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+
+        Toast.makeText(context, R.string.turn_off_battery_optimizations, Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+        intent.setData(Uri.parse("package:" + context.getPackageName()));
+
+        context.startActivity(intent);
     }
 
     static void loadCMTSData(@NotNull Context context, @NotNull Profile profile) {

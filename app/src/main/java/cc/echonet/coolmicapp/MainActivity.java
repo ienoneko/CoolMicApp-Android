@@ -540,6 +540,11 @@ public class MainActivity extends Activity implements EventListener {
     }
 
     @Override
+    public void onBackgroundServiceBatteryOptimizationsIsOn() {
+        Utils.openBatteryOptimizationSettings(this);
+    }
+
+    @Override
     public void onBackgroundServiceConnectionUnset() {
         AlertDialog.Builder alertDialog = Utils.buildAlertDialogCMTSTOS(this);
         alertDialog.setPositiveButton(R.string.mainactivity_missing_connection_details_yes, (dialog, which) -> {

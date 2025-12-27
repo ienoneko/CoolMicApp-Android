@@ -41,6 +41,7 @@ public class Constants {
     public static final int S2C_MSG_VUMETER = 58;
     public static final int S2C_MSG_ERROR = 59;
     public static final int S2C_MSG_GAIN = 60;
+    public static final int S2C_MSG_BATTERY_OPTIMIZATIONS_DETECTED = 61;
 
     /* ???-to-server */
     public static final int H2S_MSG_TIMER = 100;

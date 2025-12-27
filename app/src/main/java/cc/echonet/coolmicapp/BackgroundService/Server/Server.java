@@ -447,6 +447,13 @@ public class Server extends Service implements CallbackHandler {
             return;
         }
 
+        if (Utils.checkBatteryOptimizationsEnabled(getApplicationContext())) {
+            Message msgReply = createMessage(Constants.S2C_MSG_BATTERY_OPTIMIZATIONS_DETECTED);
+
+            sendMessage(replyTo, msgReply);
+            return;
+        }
+
         if (!driver.isReady()) {
             Toast.makeText(getApplicationContext(), R.string.mainactivity_toast_native_components_not_ready, Toast.LENGTH_SHORT).show();
             return;
