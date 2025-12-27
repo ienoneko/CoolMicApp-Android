@@ -248,9 +248,22 @@ public class Server extends Service implements CallbackHandler {
         sendMessageToAll(msgReply);
     }
 
+    private void setupForegroundService() {
+        postNotification();
+        startForeground(Constants.NOTIFICATION_ID_LED, notification);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        setupForegroundService();
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        int ret = super.onStartCommand(intent, flags, startId);
+        setupForegroundService();
+
+        super.onStartCommand(intent, flags, startId);
 
         if (intent != null) {
             int what = Objects.requireNonNull(intent.getExtras()).getInt("what");
@@ -263,7 +276,7 @@ public class Server extends Service implements CallbackHandler {
             mIncomingHandler.handleMessage(message);
         }
 
-        return ret;
+        return Service.START_NOT_STICKY;
     }
 
     /**
@@ -625,6 +638,8 @@ public class Server extends Service implements CallbackHandler {
         stopStream(null);
 
         nm.cancel(Constants.NOTIFICATION_ID_LED);
+
+        stopForeground(true);
 
         if (icecast != null) {
             icecast.close();

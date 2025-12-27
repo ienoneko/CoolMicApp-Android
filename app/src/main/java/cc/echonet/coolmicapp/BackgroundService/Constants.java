@@ -50,7 +50,7 @@ public class Constants {
 
     public static final int NEXTSEGMENT_REQUEST_CODE = 33;
 
-    public static final int NOTIFICATION_ID_LED = 0;
+    public static final int NOTIFICATION_ID_LED = 1;
 
     public enum CONTROL_UI {
         CONTROL_UI_CONNECTING,
