@@ -48,7 +48,7 @@ import java.util.logging.Logger;
  * </ul>
  */
 public final class Wrapper implements Closeable {
-    private static final @NotNull String[] auxiliaryLibraries = new String[]{"ogg", "vorbis", "shout", "coolmic-dsp"};
+    private static final @NotNull String[] auxiliaryLibraries = new String[]{"igloo", "ogg", "opus", "vorbis", "vorbisenc", "shout", "coolmic-dsp"};
     private static final @NotNull String[] mainLibraries = new String[]{"coolmic-dsp-java"};
     private static final @NotNull Logger LOGGER = Logger.getLogger(Wrapper.class.getName());
 
