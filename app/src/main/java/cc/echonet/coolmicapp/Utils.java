@@ -112,6 +112,12 @@ public final class Utils {
             if (minimalOnly && permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE))
                 continue;
 
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && permission.equals(Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS))
+                continue;
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P && permission.equals(Manifest.permission.FOREGROUND_SERVICE))
+                continue;
+
             if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
                 grantedCount++;
             }
