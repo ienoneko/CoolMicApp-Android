@@ -83,7 +83,6 @@ public class Server extends Service implements CallbackHandler {
 
     private String oldNotificationMessage;
     private String oldNotificationTitle;
-    private boolean oldNotificationFlashLed;
 
     private Icecast icecast;
 
@@ -337,17 +336,15 @@ public class Server extends Service implements CallbackHandler {
     }
 
     private void postNotification() {
-        boolean flashLed = (state.uiState == Constants.CONTROL_UI.CONTROL_UI_CONNECTED);
         String title = String.format(Locale.ENGLISH, "%s %s", getString(R.string.lblState), state.getTextState(this));
         String message = String.format(Locale.ENGLISH, "%s %s", getString(R.string.lblListeners), state.getListenersString(getApplicationContext()));
 
-        if (message.equals(oldNotificationMessage) && title.equals(oldNotificationTitle) && flashLed == oldNotificationFlashLed) {
+        if (message.equals(oldNotificationMessage) && title.equals(oldNotificationTitle)) {
             return;
         }
 
         oldNotificationMessage = message;
         oldNotificationTitle = title;
-        oldNotificationFlashLed = flashLed;
 
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -379,11 +376,6 @@ public class Server extends Service implements CallbackHandler {
         }
 
         builder = builder.setOngoing(true).setSmallIcon(R.drawable.icon).setContentIntent(resultPendingIntent).setContentTitle(title).setContentText(message).setOnlyAlertOnce(true);
-
-
-        if (flashLed) {
-            builder.setLights(0xFFff0000, 100, 100);
-        }
 
         notification = builder.build();
 
