@@ -199,19 +199,22 @@ public class SettingsActivity extends PreferenceActivity {
                 String stringValue = value.toString();
                 SharedPreferences.Editor editor = getPreferenceManager().getSharedPreferences().edit();
 
-                String mountpoint = getPreferenceManager().getSharedPreferences().getString("connection_mountpoint", getString(R.string.pref_default_connection_mountpoint));
+                String mountpoint = getPreferenceManager().getSharedPreferences().getString("connection_mountpoint", null);
 
                 //Opus Codec name is supposed to be static
                 if (stringValue.equals(Codec.TYPE_OPUS)) {
                     handleSampleRateEnabled(false);
-                    mountpoint = mountpoint.replace("ogg", "opus");
+                    if (mountpoint != null)
+                        mountpoint = mountpoint.replace("ogg", "opus");
                     editor.putString("audio_samplerate", getString(R.string.pref_default_audio_samplerate));
                 } else {
                     handleSampleRateEnabled(true);
-                    mountpoint = mountpoint.replace("opus", "ogg");
+                    if (mountpoint != null)
+                        mountpoint = mountpoint.replace("opus", "ogg");
                 }
 
-                editor.putString("connection_mountpoint", mountpoint);
+                if (mountpoint != null)
+                    editor.putString("connection_mountpoint", mountpoint);
 
                 editor.apply();
 
@@ -221,24 +224,6 @@ public class SettingsActivity extends PreferenceActivity {
 
                 return true;
             });
-
-            Preference button_util_conn_default = getPreferenceManager().findPreference("util_conn_default");
-            if (button_util_conn_default != null) {
-                button_util_conn_default.setOnPreferenceClickListener(arg0 -> {
-                    AlertDialog.Builder alertDialog = Utils.buildAlertDialogCMTSTOS(getActivity());
-                    alertDialog.setPositiveButton(R.string.mainactivity_missing_connection_details_yes, (dialog, which) -> {
-                        Utils.loadCMTSData(getActivity().getApplicationContext(), (new Manager(getActivity())).getCurrentProfile());
-
-                        refreshSummaryForConnectionSettings();
-                        handleSampleRateEnabled();
-                    });
-
-                    alertDialog.show();
-
-
-                    return true;
-                });
-            }
 
             Preference button_util_qr_scan = getPreferenceManager().findPreference("util_qr_scan");
             if (button_util_qr_scan != null) {

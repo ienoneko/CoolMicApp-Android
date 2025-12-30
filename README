@@ -29,7 +29,6 @@ Features
   + Configurable sample rate (8000, 11025, 16000, 22050, 44100, 48000Hz)
   + Configurable server port (Under “Connection”, use SERVER:PORT)
   + Scan QR Code for auto-configuration
-  + Allows basic testing by using predefined Cool Mic Test Server configuration (CMTS)
   + Prevents screen + Wi-Fi sleep mode during livestream
   + Check current Cool Mic -> Android OS permissions
   + Simple and easy to use interface

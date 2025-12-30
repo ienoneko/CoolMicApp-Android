@@ -25,7 +25,6 @@ package cc.echonet.coolmicapp;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -194,21 +193,6 @@ public final class Utils {
         intent.setData(Uri.parse("package:" + context.getPackageName()));
 
         context.startActivity(intent);
-    }
-
-    static void loadCMTSData(@NotNull Context context, @NotNull Profile profile) {
-        CMTS.loadCMTSData(profile);
-
-        Toast.makeText(context, R.string.settings_conn_defaults_loaded, Toast.LENGTH_SHORT).show();
-    }
-
-    static AlertDialog.Builder buildAlertDialogCMTSTOS(@NotNull Context context) {
-        AlertDialog.Builder alertDialogCMTSTOS = new AlertDialog.Builder(context);
-        alertDialogCMTSTOS.setTitle(R.string.coolmic_tos_title);
-        alertDialogCMTSTOS.setMessage(R.string.coolmic_tos);
-        alertDialogCMTSTOS.setNegativeButton(R.string.coolmic_tos_cancel, (dialog, which) -> dialog.cancel());
-
-        return alertDialogCMTSTOS;
     }
 
     public static boolean isOnline(Context context) {

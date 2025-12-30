@@ -116,7 +116,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/prefs_header_utilities">
-        <Preference android:title="@string/pref_title_utility_connection_default" android:key="util_conn_default"/>
         <Preference android:title="@string/pref_title_utility_qr_scan" android:key="util_qr_scan"/>
     </PreferenceCategory>
 </PreferenceScreen>

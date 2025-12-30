@@ -200,10 +200,6 @@ public class Client implements Closeable {
                     client.eventListener.onBackgroundServiceConnectionUnset();
                     break;
 
-                case Constants.S2C_MSG_CMTS_TOS:
-                    client.eventListener.onBackgroundServiceCMTSTOSAcceptMissing();
-                    break;
-
                 case Constants.S2C_MSG_VUMETER:
                     Bundle bundleVUMeter = msg.getData();
                     client.eventListener.onBackgroundServiceVUMeterUpdate((VUMeterResult) bundleVUMeter.getSerializable("vumeterResult"));
@@ -274,12 +270,11 @@ public class Client implements Closeable {
         return profile;
     }
 
-    public void startRecording(boolean cmtsTOSAccepted, String profileName) {
+    public void startRecording(String profileName) {
         Message message = createMessage(Constants.C2S_MSG_STREAM_ACTION);
         Bundle bundle = message.getData();
 
         bundle.putString("profile", profileName);
-        bundle.putBoolean("cmtsTOSAccepted", cmtsTOSAccepted);
 
         sendMessage(message);
     }

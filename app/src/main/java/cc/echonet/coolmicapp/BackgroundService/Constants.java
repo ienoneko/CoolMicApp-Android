@@ -37,7 +37,6 @@ public class Constants {
     public static final int S2C_MSG_STREAM_START_REPLY = 54;
     public static final int S2C_MSG_PERMISSIONS_MISSING = 55;
     public static final int S2C_MSG_CONNECTION_UNSET = 56;
-    public static final int S2C_MSG_CMTS_TOS = 57;
     public static final int S2C_MSG_VUMETER = 58;
     public static final int S2C_MSG_ERROR = 59;
     public static final int S2C_MSG_GAIN = 60;

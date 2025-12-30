@@ -35,7 +35,6 @@ public interface EventListener {
     void onBackgroundServicePermissionsMissing();
     void onBackgroundServiceBatteryOptimizationsIsOn();
     void onBackgroundServiceConnectionUnset(); /* TODO: ??? */
-    void onBackgroundServiceCMTSTOSAcceptMissing();
     void onBackgroundServiceVUMeterUpdate(VUMeterResult result);
     void onBackgroundServiceGainUpdate(int left, int right);
 }

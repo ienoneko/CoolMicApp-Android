@@ -456,8 +456,7 @@ public class MainActivity extends Activity implements EventListener {
     }
 
     private void startRecording() {
-        /* cmtsTOSAccepted is always true as the user accepted it on load. */
-        backgroundServiceClient.startRecording(true, profile.getName());
+        backgroundServiceClient.startRecording(profile.getName());
     }
 
     @Override
@@ -546,23 +545,7 @@ public class MainActivity extends Activity implements EventListener {
 
     @Override
     public void onBackgroundServiceConnectionUnset() {
-        AlertDialog.Builder alertDialog = Utils.buildAlertDialogCMTSTOS(this);
-        alertDialog.setPositiveButton(R.string.mainactivity_missing_connection_details_yes, (dialog, which) -> {
-            Utils.loadCMTSData(MainActivity.this, profile);
-            startRecording();
-        });
-        alertDialog.show();
-    }
-
-    @Override
-    public void onBackgroundServiceCMTSTOSAcceptMissing() {
-        AlertDialog.Builder alertDialogCMTSTOS = new AlertDialog.Builder(this);
-        alertDialogCMTSTOS.setTitle(R.string.coolmic_tos_title);
-        alertDialogCMTSTOS.setMessage(R.string.coolmic_tos);
-        alertDialogCMTSTOS.setNegativeButton(R.string.coolmic_tos_cancel, (dialog, which) -> dialog.cancel());
-        alertDialogCMTSTOS.setPositiveButton(R.string.coolmic_tos_accept, (dialog, which) -> startRecording());
-
-        alertDialogCMTSTOS.show();
+        Toast.makeText(getApplicationContext(), R.string.mainactivity_connectiondetails_unset, Toast.LENGTH_SHORT).show();
     }
 
     @Override

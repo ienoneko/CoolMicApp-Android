@@ -35,7 +35,6 @@ import android.util.Log;
 import android.widget.Toast;
 import cc.echonet.coolmicapp.BackgroundService.Constants;
 import cc.echonet.coolmicapp.BackgroundService.State;
-import cc.echonet.coolmicapp.CMTS;
 import cc.echonet.coolmicapp.Configuration.Manager;
 import cc.echonet.coolmicapp.Configuration.Profile;
 import cc.echonet.coolmicapp.Configuration.Volume;
@@ -168,9 +167,8 @@ public class Server extends Service implements CallbackHandler {
                 case Constants.C2S_MSG_STREAM_ACTION:
 
                     String profile = data.getString("profile");
-                    boolean cmtsTOSAccepted = data.getBoolean("cmtsTOSAccepted", false);
 
-                    service.prepareStream(profile, cmtsTOSAccepted, msg.replyTo);
+                    service.prepareStream(profile, msg.replyTo);
 
                     break;
 
@@ -419,7 +417,7 @@ public class Server extends Service implements CallbackHandler {
         }
     }
 
-    private void prepareStream(final String profileName, boolean cmtsTOSAccepted, final Messenger replyTo) {
+    private void prepareStream(final String profileName, final Messenger replyTo) {
         manager.getGlobalConfiguration().setCurrentProfileName(profileName);
         profile = manager.getCurrentProfile();
         driver.setProfile(profile);
@@ -476,14 +474,6 @@ public class Server extends Service implements CallbackHandler {
 
         if (!profile.getServer().isSet()) {
             Message msgReply = createMessage(Constants.S2C_MSG_CONNECTION_UNSET);
-
-            sendMessage(replyTo, msgReply);
-
-            return;
-        }
-
-        if (CMTS.isCMTSConnection(profile) && !cmtsTOSAccepted) {
-            Message msgReply = createMessage(Constants.S2C_MSG_CMTS_TOS);
 
             sendMessage(replyTo, msgReply);
 

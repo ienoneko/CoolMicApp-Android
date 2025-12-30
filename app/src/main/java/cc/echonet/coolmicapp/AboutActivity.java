@@ -147,7 +147,6 @@ public class AboutActivity extends Activity {
                     profile.getVUMeter().getInterval(),
                     volume.getLeft(),
                     volume.getRight(),
-                    CMTS.isCMTSConnection(profile),
                     Wrapper.getStaticInitializationState()
             );
         }
