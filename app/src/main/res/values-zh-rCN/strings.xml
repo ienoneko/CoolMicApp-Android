@@ -19,11 +19,13 @@
     <string name="lblState">狀態:</string>
     <string name="lblListeners">視聽者:</string>
     <string name="broadcast_stop_message">Live 停止</string>
+    <string name="mainactivity_connectiondetails_unset">未設定 connection 詳細</string>
     <string name="mainactivity_callback_error">發生 Error！詳細：%1$s</string>
     <string name="formatListeners">%1$d ( 最大: %2$d )</string>
     <string name="coolmic_error_n1">不明問題</string>
     <string name="coolmic_error_n13">検証失敗</string>
     <string name="coolmic_error_n14">通信拒絕</string>
+    <string name="pref_title_edit_stationmetadata">編輯 Station Metadata</string>
     <string name="pref_header_connection">通信設定</string>
     <string name="coolmic_cs_p1">Connect 中</string>
     <string name="coolmic_cs_p2">已 Connect</string>
@@ -38,4 +40,8 @@
         <item>Stereo (2 個 Channel)</item>
     </string-array>
     <string name="menu_action_quit">終了</string>
+    <string name="metadata_delete">削除</string>
+    <string name="metadata_add">追加</string>
+    <string name="pref_title_edit_trackmetadata">編輯 Track Metadata</string>
+    <string name="notification_id_channel">CoolMic 通知</string>
 </resources>
